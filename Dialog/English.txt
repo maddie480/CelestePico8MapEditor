@@ -1,0 +1,6 @@
+﻿modname_pico8maploadereditor= PICO-8 Map Editor & Loader
+
+pico8maploader_pickamap= Choose a Map
+pico8maploader_vanilla= Vanilla
+
+pico8map_intothejungleclassic= Into The Jungle Classic

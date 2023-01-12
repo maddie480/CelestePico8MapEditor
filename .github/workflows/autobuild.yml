@@ -1,0 +1,58 @@
+name: Build using .NET Core
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Check for tabs
+      run: |
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No tab found!"
+
+    - name: Check for CRLF
+      run: |
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No CRLF found!"
+
+    - name: Check for trailing spaces
+      run: |
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No trailing space found!"
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+        cache: maven
+
+    - name: Restore with .NET Core
+      run: dotnet restore
+
+    - name: Build using Mono
+      run: msbuild *.sln "/p:Configuration=Release"
+      
+    - name: Copy artifacts over to Java resources
+      run: cp -rv bin Dialog everest.yaml Editor/src/main/resources/
+
+    - name: Build with Maven
+      run: mvn -B package --file Editor/pom.xml
+
+    - name: Publish release
+      env:
+        ZIPNAME: Pico8MapLoaderEditor
+        GITHUB_SHA: ${{ github.sha }}
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      run: |
+        ZIPNAME=$ZIPNAME-${GITHUB_SHA:0:8}.zip
+        mv -v Editor/target/pico8editor-* $ZIPNAME
+        curl -H 'Content-Type: multipart/form-data' -X POST -F "file=@$ZIPNAME" "$DISCORD_WEBHOOK"
