@@ -48,6 +48,7 @@ jobs:
       run: mvn -B package --file Editor/pom.xml
 
     - name: Publish release
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/gh-actions'
       env:
         ZIPNAME: Pico8MapLoaderEditor
         GITHUB_SHA: ${{ github.sha }}
