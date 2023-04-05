@@ -99,7 +99,7 @@ public class Main {
         BufferedImage result = renderPico8(tiles, tilemapFile);
 
         // display the map window
-        JFrame mapWindow = new JFrame("Mini PICO-8 Map Editor by max480 / Ctrl+Z to undo, Ctrl+Y to redo");
+        JFrame mapWindow = new JFrame("Mini PICO-8 Map Editor by maddie480 / Ctrl+Z to undo, Ctrl+Y to redo");
         JLabel mapImage = new JLabel(new ImageIcon(result));
         JPanel black = new JPanel();
         black.add(mapImage);
