@@ -57,3 +57,6 @@ jobs:
         ZIPNAME=$ZIPNAME-${GITHUB_SHA:0:8}.zip
         mv -v Editor/target/pico8editor-* $ZIPNAME
         curl -H 'Content-Type: multipart/form-data' -X POST -F "file=@$ZIPNAME" "$DISCORD_WEBHOOK"
+
+    - name: Submit Dependency Snapshot
+      uses: advanced-security/maven-dependency-submission-action@v3
