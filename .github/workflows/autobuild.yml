@@ -59,6 +59,7 @@ jobs:
         curl -H 'Content-Type: multipart/form-data' -X POST -F "file=@$ZIPNAME" "$DISCORD_WEBHOOK"
 
     - name: Submit Dependency Snapshot
+      if: github.ref == 'refs/heads/main'
       uses: advanced-security/maven-dependency-submission-action@v3
       with:
         directory: Editor
