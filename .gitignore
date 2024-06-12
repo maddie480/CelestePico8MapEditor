@@ -270,3 +270,6 @@ hs_err_pid*
 Editor/.idea/
 Editor/dependency-reduced-pom.xml
 Editor/target/
+
+# JetBrains Rider
+.idea/
