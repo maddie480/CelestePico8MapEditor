@@ -1,4 +1,4 @@
-module PicoConsole
+module Pico8MapLoaderCustomPicoConsole
 
 using ..Ahorn, Maple
 
