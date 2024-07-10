@@ -1,0 +1,4 @@
+mods.Pico8MapLoaderEditor.name=PICO-8 Map Loader
+
+entities.Pico8MapLoader/CustomPicoConsole.placements.name.pico_console=Pico Console (Custom Map)
+entities.Pico8MapLoader/CustomPicoConsole.attributes.description.mapToLoad=The path to the directory containing the map, relative to Pico8Maps.\nFor example, if the map is located in Pico8Maps/yourname_foldername/tilemap.txt, type "yourname_foldername" here.

@@ -1,0 +1,1 @@
+placements.entities.Pico8MapLoader/CustomPicoConsole.tooltips.mapToLoad=The path to the directory containing the map, relative to Pico8Maps.\nFor example, if the map is located in Pico8Maps/yourname_foldername/tilemap.txt, type "yourname_foldername" here.

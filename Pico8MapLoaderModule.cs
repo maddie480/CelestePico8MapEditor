@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Celeste.Mod.UI;
 using Celeste.Pico8;
-using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
 using Monocle;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
@@ -29,6 +24,7 @@ namespace Celeste.Mod.Pico8MapLoader {
             Everest.Content.OnUpdate += onModAssetUpdate;
             On.Celeste.OuiMainMenu.OnPico8 += onPico8InMainMenu;
             IL.Celeste.Pico8.Emulator.ctor += hookEmulatorConstructor;
+            On.Celeste.PicoConsole.InteractRoutine += CustomPicoConsole.hookInteractRoutine;
 
             hookOrigCtor = new ILHook(typeof(Emulator).GetMethod("orig_ctor"), hookEmulatorOrigConstructor);
         }
@@ -37,6 +33,7 @@ namespace Celeste.Mod.Pico8MapLoader {
             Everest.Content.OnUpdate -= onModAssetUpdate;
             On.Celeste.OuiMainMenu.OnPico8 -= onPico8InMainMenu;
             IL.Celeste.Pico8.Emulator.ctor -= hookEmulatorConstructor;
+            On.Celeste.PicoConsole.InteractRoutine -= CustomPicoConsole.hookInteractRoutine;
 
             hookOrigCtor?.Dispose();
             hookOrigCtor = null;

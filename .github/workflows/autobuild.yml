@@ -10,17 +10,17 @@ jobs:
 
     - name: Check for tabs
       run: |
-        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" -or -name "*.jl" -or -name "*.lua" -or -name "*.lang" ")" -exec grep -Pl "\t" {} \; > matches.txt
         grep "" matches.txt && exit 1 || echo "No tab found!"
 
     - name: Check for CRLF
       run: |
-        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" -or -name "*.jl" -or -name "*.lua" -or -name "*.lang" ")" -exec grep -Pl "\t" {} \; > matches.txt
         grep "" matches.txt && exit 1 || echo "No CRLF found!"
 
     - name: Check for trailing spaces
       run: |
-        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        find "(" -name "*.cs" -or -name "*.xml" -or -name "*.yaml" -or -name "*.yml" -or -name "*.txt" -or -name "*.md" -or -name "*.java" -or -name "*.jl" -or -name "*.lua" -or -name "*.lang" ")" -exec grep -Pl "\t" {} \; > matches.txt
         grep "" matches.txt && exit 1 || echo "No trailing space found!"
 
     - name: Setup .NET Core
@@ -42,7 +42,7 @@ jobs:
       run: msbuild *.sln "/p:Configuration=Release"
       
     - name: Copy artifacts over to Java resources
-      run: cp -rv bin Dialog everest.yaml Editor/src/main/resources/
+      run: cp -rv bin Dialog Ahorn Loenn everest.yaml Editor/src/main/resources/
 
     - name: Build with Maven
       run: mvn -B package --file Editor/pom.xml
