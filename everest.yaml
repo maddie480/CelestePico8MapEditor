@@ -1,5 +1,5 @@
 ﻿- Name: Pico8MapLoaderEditor
-  Version: 1.1.0
+  Version: 1.1.1
   DLL: bin/Release/net452/Pico8MapLoader.dll
   Dependencies:
     - Name: Everest
