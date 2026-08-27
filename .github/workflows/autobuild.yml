@@ -30,7 +30,7 @@ jobs:
       uses: actions/setup-java@v6.0.0
       with:
         java-version: '8'
-        distribution: 'adopt'
+        distribution: 'temurin'
         cache: maven
 
     - name: Restore with .NET Core
